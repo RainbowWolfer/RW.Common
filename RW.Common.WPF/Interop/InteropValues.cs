@@ -7,6 +7,7 @@ using System.Windows;
 
 namespace RW.Common.WPF.Interop;
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 public class InteropValues {
 	public static class ExternDll {
 		public const string
@@ -172,14 +173,9 @@ public class InteropValues {
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public struct POINT {
-		public int X;
-		public int Y;
-
-		public POINT(int x, int y) {
-			X = x;
-			Y = y;
-		}
+	public struct POINT(int x, int y) {
+		public int X = x;
+		public int Y = y;
 	}
 
 	public enum HookType {
@@ -230,24 +226,24 @@ public class InteropValues {
 			Bottom = (int)rect.Bottom;
 		}
 
-		public Point Position => new(Left, Top);
-		public Size Size => new(Width, Height);
+		public readonly Point Position => new(Left, Top);
+		public readonly Size Size => new(Width, Height);
 
 		public int Height {
-			get => Bottom - Top;
+			readonly get => Bottom - Top;
 			set => Bottom = Top + value;
 		}
 
 		public int Width {
-			get => Right - Left;
+			readonly get => Right - Left;
 			set => Right = Left + value;
 		}
 
-		public bool Equals(RECT other) {
+		public readonly bool Equals(RECT other) {
 			return Left == other.Left && Right == other.Right && Top == other.Top && Bottom == other.Bottom;
 		}
 
-		public override bool Equals(object obj) {
+		public readonly override bool Equals(object? obj) {
 			return obj is RECT rectangle && Equals(rectangle);
 		}
 
@@ -626,42 +622,28 @@ public class InteropValues {
 	}
 
 	[StructLayout(LayoutKind.Sequential, Pack = 2)]
-	public struct BITMAPINFO {
-		public int biSize;
+	public struct BITMAPINFO(int width, int height, short bpp) {
+		public int biSize = SizeOf();
 
-		public int biWidth;
+		public int biWidth = width;
 
-		public int biHeight;
+		public int biHeight = height;
 
-		public short biPlanes;
+		public short biPlanes = 1;
 
-		public short biBitCount;
+		public short biBitCount = bpp;
 
-		public int biCompression;
+		public int biCompression = 0;
 
-		public int biSizeImage;
+		public int biSizeImage = 0;
 
-		public int biXPelsPerMeter;
+		public int biXPelsPerMeter = 0;
 
-		public int biYPelsPerMeter;
+		public int biYPelsPerMeter = 0;
 
-		public int biClrUsed;
+		public int biClrUsed = 0;
 
-		public int biClrImportant;
-
-		public BITMAPINFO(int width, int height, short bpp) {
-			biSize = SizeOf();
-			biWidth = width;
-			biHeight = height;
-			biPlanes = 1;
-			biBitCount = bpp;
-			biCompression = 0;
-			biSizeImage = 0;
-			biXPelsPerMeter = 0;
-			biYPelsPerMeter = 0;
-			biClrUsed = 0;
-			biClrImportant = 0;
-		}
+		public int biClrImportant = 0;
 
 		[SecuritySafeCritical]
 		private static int SizeOf() {
@@ -674,8 +656,8 @@ public class InteropValues {
 		public bool fIcon = false;
 		public int xHotspot = 0;
 		public int yHotspot = 0;
-		public BitmapHandle hbmMask = null;
-		public BitmapHandle hbmColor = null;
+		public BitmapHandle? hbmMask = null;
+		public BitmapHandle? hbmColor = null;
 	}
 
 	public enum WINDOWCOMPOSITIONATTRIB {
@@ -731,10 +713,9 @@ public class InteropValues {
 		void Stat([In] IntPtr pStatstg, [In] int grfStatFlag);
 
 		[return: MarshalAs(UnmanagedType.Interface)]
-		IStream Clone();
+		IStream? Clone();
 	}
 
-	[SuppressMessage("ReSharper", "InconsistentNaming")]
 	public class StreamConsts {
 		public const int LOCK_WRITE = 0x1;
 		public const int LOCK_EXCLUSIVE = 0x2;
@@ -773,15 +754,11 @@ public class InteropValues {
 		public IntPtr SigMask = IntPtr.Zero;
 	}
 
-	public class ComStreamFromDataStream : IStream {
-		protected Stream DataStream;
+	public class ComStreamFromDataStream(Stream dataStream) : IStream {
+		protected Stream DataStream = dataStream ?? throw new ArgumentNullException(nameof(dataStream));
 
 		// to support seeking ahead of the stream length...
 		private long _virtualPosition = -1;
-
-		public ComStreamFromDataStream(Stream dataStream) {
-			DataStream = dataStream ?? throw new ArgumentNullException(nameof(dataStream));
-		}
 
 		private void ActualizeVirtualPosition() {
 			if (_virtualPosition == -1) {
@@ -797,7 +774,7 @@ public class InteropValues {
 			_virtualPosition = -1;
 		}
 
-		public virtual IStream Clone() {
+		public virtual IStream? Clone() {
 			NotImplemented();
 			return null;
 		}
@@ -808,8 +785,8 @@ public class InteropValues {
 		}
 
 		public virtual long CopyTo(IStream pstm, long cb, long[] pcbRead) {
-			const int bufsize = 4096; // one page
-			IntPtr buffer = Marshal.AllocHGlobal(bufsize);
+			const int BufSize = 4096; // one page
+			IntPtr buffer = Marshal.AllocHGlobal(BufSize);
 			if (buffer == IntPtr.Zero) {
 				throw new OutOfMemoryException();
 			}
@@ -818,7 +795,7 @@ public class InteropValues {
 
 			try {
 				while (written < cb) {
-					int toRead = bufsize;
+					int toRead = BufSize;
 					if (written + toRead > cb) {
 						toRead = (int)(cb - written);
 					}
@@ -977,7 +954,7 @@ public class InteropValues {
 		///     the window's size is not being changed. If this flag is not specified, WM_NCCALCSIZE is sent only when the window's
 		///     size is being changed.
 		/// </summary>
-		SWP_FRAMECHANGED = 0x0020,
+		SWPFRAMECHANGED = 0x0020,
 
 		/// <summary>
 		///     Hides the window.
@@ -1112,3 +1089,5 @@ public class InteropValues {
 		FORCEMINIMIZE = 11,
 	}
 }
+
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.

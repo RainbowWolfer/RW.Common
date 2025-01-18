@@ -39,7 +39,7 @@ public abstract class BoolToValueConverter<T> : DependencyObject, IValueConverte
 		FalseValue = falseValue;
 	}
 
-	public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+	public virtual object? Convert(object value, Type targetType, object parameter, CultureInfo culture) {
 		if (value is bool b) {
 			return b ? TrueValue : FalseValue;
 		}

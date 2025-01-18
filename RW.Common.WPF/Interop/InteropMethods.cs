@@ -12,6 +12,9 @@ using System.Text;
 
 namespace RW.Common.WPF.Interop;
 
+#pragma warning disable SYSLIB0004 // Type or member is obsolete
+#pragma warning disable SYSLIB0003 // Type or member is obsolete
+
 public class InteropMethods {
 	#region common
 
@@ -462,7 +465,7 @@ public class InteropMethods {
 	public static extern bool ShowWindow(IntPtr hwnd, InteropValues.SW nCmdShow);
 
 	[ReflectionPermission(SecurityAction.Assert, Unrestricted = true), SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode)]
-	public static object PtrToStructure(IntPtr lparam, Type cls) => Marshal.PtrToStructure(lparam, cls);
+	public static object? PtrToStructure(IntPtr lparam, Type cls) => Marshal.PtrToStructure(lparam, cls);
 
 	[ReflectionPermission(SecurityAction.Assert, Unrestricted = true),
 	 SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode)]
@@ -721,3 +724,6 @@ public class InteropMethods {
 
 	}
 }
+
+#pragma warning restore SYSLIB0003 // Type or member is obsolete
+#pragma warning restore SYSLIB0004 // Type or member is obsolete

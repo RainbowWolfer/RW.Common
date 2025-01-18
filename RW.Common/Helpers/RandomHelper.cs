@@ -11,7 +11,7 @@ public static class RandomHelper {
 	/// <param name="length">The length of the string.</param>
 	/// <param name="random">Optional random number generator. Defaults to the shared instance.</param>
 	/// <returns>A random string.</returns>
-	public static string GetRandomString(int length, Random random = null) {
+	public static string GetRandomString(int length, Random? random = null) {
 		random ??= Shared;
 		StringBuilder builder = new();
 		for (int i = 0; i < length; i++) {
@@ -29,7 +29,7 @@ public static class RandomHelper {
 	/// <param name="maxValue">Exclusive upper bound.</param>
 	/// <param name="random">Optional random number generator. Defaults to the shared instance.</param>
 	/// <returns>A random integer.</returns>
-	public static int GetRandomInt(int minValue, int maxValue, Random random = null) {
+	public static int GetRandomInt(int minValue, int maxValue, Random? random = null) {
 		random ??= Shared;
 		return random.Next(minValue, maxValue); // maxValue is exclusive
 	}
@@ -41,7 +41,7 @@ public static class RandomHelper {
 	/// <param name="maxValue">Inclusive upper bound.</param>
 	/// <param name="random">Optional random number generator. Defaults to the shared instance.</param>
 	/// <returns>A random double.</returns>
-	public static double GetRandomDouble(double minValue, double maxValue, Random random = null) {
+	public static double GetRandomDouble(double minValue, double maxValue, Random? random = null) {
 		random ??= Shared;
 		return random.NextDouble() * (maxValue - minValue) + minValue; // minValue and maxValue are inclusive
 	}
@@ -51,7 +51,7 @@ public static class RandomHelper {
 	/// </summary>
 	/// <param name="random">Optional random number generator. Defaults to the shared instance.</param>
 	/// <returns>A random boolean value.</returns>
-	public static bool GetRandomBool(Random random = null) {
+	public static bool GetRandomBool(Random? random = null) {
 		random ??= Shared;
 		return random.Next(2) == 1;
 	}
@@ -63,7 +63,7 @@ public static class RandomHelper {
 	/// <param name="endDate">Exclusive end date.</param>
 	/// <param name="random">Optional random number generator. Defaults to the shared instance.</param>
 	/// <returns>A random date.</returns>
-	public static DateTime GetRandomDate(DateTime startDate, DateTime endDate, Random random = null) {
+	public static DateTime GetRandomDate(DateTime startDate, DateTime endDate, Random? random = null) {
 		random ??= Shared;
 		int range = (endDate - startDate).Days;
 		return startDate.AddDays(random.Next(range)); // endDate is exclusive
@@ -75,7 +75,7 @@ public static class RandomHelper {
 	/// <param name="length">The length of the byte array.</param>
 	/// <param name="random">Optional random number generator. Defaults to the shared instance.</param>
 	/// <returns>A random byte array.</returns>
-	public static byte[] GetRandomBytes(int length, Random random = null) {
+	public static byte[] GetRandomBytes(int length, Random? random = null) {
 		random ??= Shared;
 		byte[] bytes = new byte[length];
 		random.NextBytes(bytes);

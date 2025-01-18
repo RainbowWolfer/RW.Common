@@ -5,12 +5,28 @@
     <Nullable>enable</Nullable>
     <LangVersion>12</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
+
+    <NoWarn>CS1591</NoWarn>
+    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
     
     <Authors>RainbowWolfer</Authors>
     <Company>RainbowWolfer</Company>
     <Version>1.0.0</Version>
     <Description>Common library for RW project</Description>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>RW.Common</Title>
+    <Copyright>RainbowWolfer</Copyright>
+    <PackageProjectUrl>https://github.com/RainbowWolfer/RW.Common</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/RainbowWolfer/RW.Common</RepositoryUrl>
   
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
