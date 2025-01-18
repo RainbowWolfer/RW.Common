@@ -1,0 +1,179 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:c="clr-namespace:RW.Common.WPF.Controls"
+	xmlns:commands="clr-namespace:RW.Common.WPF.Commands"
+	xmlns:con="clr-namespace:RW.Common.WPF.Converters"
+	xmlns:o="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+
+	<!-- Converters -->
+
+	<con:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+	<con:DateTimeConverter x:Key="DateTimeConverter"/>
+	<con:EnumToBoolConverter x:Key="EnumToBoolConverter"/>
+	<con:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter"/>
+	<con:IListToBoolConverter x:Key="IListToBoolConverter"/>
+	<con:IListToCountConverter x:Key="IListToCountConverter"/>
+	<con:IListToIndexConverter x:Key="IListToIndexConverter"/>
+	<con:IListToVisibilityConverter x:Key="IListToVisibilityConverter"/>
+	<con:IsSubClassConverter x:Key="IsSubClassConverter"/>
+
+	<con:ContrastBrushConverter x:Key="ContrastBrushConverter"/>
+	<con:DescriptionConverter x:Key="DescriptionConverter"/>
+	<con:String2BooleanConverter x:Key="String2BooleanConverter"/>
+	<con:String2BooleanReConverter x:Key="String2BooleanReConverter"/>
+	<con:VisibilityToVisibilityReConverter x:Key="VisibilityToVisibilityReConverter"/>
+
+	<con:Boolean2BooleanReConverter x:Key="Boolean2BooleanReConverter"/>
+	<con:Boolean2VisibilityConverter x:Key="Boolean2VisibilityConverter"/>
+	<con:Boolean2VisibilityReConverter x:Key="Boolean2VisibilityReConverter"/>
+	<con:BooleanArr2VisibilityConverter x:Key="BooleanArr2VisibilityConverter"/>
+	<con:BooleanArr2BooleanConverter x:Key="BooleanArr2BooleanConverter"/>
+	<con:String2VisibilityConverter x:Key="String2VisibilityConverter"/>
+	<con:String2VisibilityReConverter x:Key="String2VisibilityReConverter"/>
+	<con:Object2BooleanConverter x:Key="Object2BooleanConverter"/>
+	<con:Object2BooleanReConverter x:Key="Object2BooleanReConverter"/>
+	<con:Boolean2StringConverter x:Key="Boolean2StringConverter"/>
+	<con:Object2VisibilityConverter x:Key="Object2VisibilityConverter"/>
+	<con:Object2VisibilityReConverter x:Key="Object2VisibilityReConverter"/>
+	<con:Object2StringConverter x:Key="Object2StringConverter"/>
+	<con:ThicknessSplitConverter x:Key="ThicknessSplitConverter"/>
+	<con:CornerRadiusSplitConverter x:Key="CornerRadiusSplitConverter"/>
+	<con:TreeViewItemMarginConverter x:Key="TreeViewItemMarginConverter"/>
+
+	<MenuScrollingVisibilityConverter x:Key="MenuScrollingVisibilityConverter"/>
+
+	<!-- Colors & Brushes -->
+
+	<SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+	<SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+	<SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+
+	<!-- Shapes -->
+
+	<Geometry x:Key="DownGeometry" o:Freeze="True">M512 801.6896L5.12 282.0096l58.1632-59.5968L512 682.3936l448.7168-460.0832 58.1632 59.5968-506.88 519.7824z</Geometry>
+	<Geometry x:Key="UpGeometry" o:Freeze="True">M50.000001,0 L100,51.262779 94.262627,57.141584 50.000001,11.767713 5.7373757,57.151686 0,51.27288 z</Geometry>
+
+	<!-- Styles -->
+
+	<Style x:Key="NumberBoxUpDownButton" TargetType="Button">
+		<Setter Property="Height" Value="12"/>
+		<Setter Property="Width" Value="12"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Focusable" Value="False"/>
+		<Setter Property="IsTabStop" Value="False"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border x:Name="border"
+						Background="{TemplateBinding Background}"
+						BorderBrush="{TemplateBinding BorderBrush}"
+						BorderThickness="{TemplateBinding BorderThickness}"
+						SnapsToDevicePixels="True">
+						<ContentPresenter x:Name="contentPresenter"
+							Margin="{TemplateBinding Padding}"
+							HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+							Focusable="False" RecognizesAccessKey="True"
+							SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Opacity" Value="0.7"/>
+						</Trigger>
+						<Trigger Property="IsPressed" Value="True">
+							<Setter Property="Opacity" Value="0.5"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="NumberBoxBaseStyle" TargetType="{x:Type c:NumberBox}">
+		<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+		<Setter Property="HorizontalContentAlignment" Value="Left"/>
+		<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+		<Setter Property="AllowDrop" Value="False"/>
+		<Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type c:NumberBox}">
+					<Border x:Name="border"
+						Background="{TemplateBinding Background}"
+						BorderBrush="{TemplateBinding BorderBrush}"
+						BorderThickness="{TemplateBinding BorderThickness}"
+						SnapsToDevicePixels="True">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="auto"/>
+							</Grid.ColumnDefinitions>
+							<Border x:Name="PART_ContentHost" Focusable="false"/>
+							<Border x:Name="buttonsBorder" Grid.Column="1" Padding="2,0">
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="*"/>
+										<RowDefinition Height="*"/>
+									</Grid.RowDefinitions>
+									<Button x:Name="Part_UpButton"
+										Style="{StaticResource NumberBoxUpDownButton}"
+										Grid.Row="0"
+										Command="{x:Static commands:WpfCommands.Next}">
+										<Path
+											Data="{StaticResource UpGeometry}"
+											Fill="{TemplateBinding Foreground}"
+											SnapsToDevicePixels="True" Stretch="Uniform"/>
+									</Button>
+									<Button x:Name="Part_DownButton"
+										Style="{StaticResource NumberBoxUpDownButton}"
+										Grid.Row="1"
+										Command="{x:Static commands:WpfCommands.Previous}">
+										<Path
+											Data="{StaticResource DownGeometry}"
+											Fill="{TemplateBinding Foreground}"
+											SnapsToDevicePixels="True" Stretch="Uniform"/>
+									</Button>
+								</Grid>
+							</Border>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter TargetName="border" Property="Opacity" Value="0.56"/>
+						</Trigger>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter TargetName="border" Property="BorderBrush" Value="{StaticResource TextBox.MouseOver.Border}"/>
+						</Trigger>
+						<Trigger Property="IsKeyboardFocused" Value="True">
+							<Setter TargetName="border" Property="BorderBrush" Value="{StaticResource TextBox.Focus.Border}"/>
+						</Trigger>
+						<Trigger Property="ShowUpDownButton" Value="False">
+							<Setter TargetName="buttonsBorder" Property="Visibility" Value="Collapsed"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<MultiTrigger>
+				<MultiTrigger.Conditions>
+					<Condition Property="IsInactiveSelectionHighlightEnabled" Value="True"/>
+					<Condition Property="IsSelectionActive" Value="False"/>
+				</MultiTrigger.Conditions>
+				<Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+			</MultiTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="c:NumberBox" BasedOn="{StaticResource NumberBoxBaseStyle}"/>
+
+</ResourceDictionary>

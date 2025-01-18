@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <Authors>RainbowWolfer</Authors>
+    <Company>RainbowWolfer</Company>
+    <Version>1.0.0</Version>
+    <Description>Common WPF library for RW project</Description>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RW.Common\RW.Common.csproj" />
+  </ItemGroup>
+
+</Project>
