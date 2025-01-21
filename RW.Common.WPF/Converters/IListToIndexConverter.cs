@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using RW.Common.Helpers;
+using System.Collections;
 using System.Globalization;
 using System.Windows.Controls;
-using RW.Common.Helpers;
 using System.Windows.Data;
 
 namespace RW.Common.WPF.Converters;

@@ -1,9 +1,9 @@
-﻿using System.Globalization;
+﻿using RW.Common.Helpers;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using RW.Common.Helpers;
 
 namespace RW.Common.WPF.Converters;
 

@@ -1,5 +1,4 @@
 ﻿using RW.Common.WPF.Interop.Handle;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security;
@@ -243,7 +242,7 @@ public class InteropValues {
 			return Left == other.Left && Right == other.Right && Top == other.Top && Bottom == other.Bottom;
 		}
 
-		public readonly override bool Equals(object? obj) {
+		public override readonly bool Equals(object? obj) {
 			return obj is RECT rectangle && Equals(rectangle);
 		}
 

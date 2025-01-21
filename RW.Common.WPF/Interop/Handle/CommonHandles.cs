@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace RW.Common.WPF.Interop.Handle;
+﻿namespace RW.Common.WPF.Interop.Handle;
 
 internal static class CommonHandles {
 	public static readonly int Icon = HandleCollector.RegisterType(nameof(Icon), 20, 500);
