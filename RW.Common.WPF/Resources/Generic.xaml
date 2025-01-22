@@ -11,11 +11,15 @@
 	<con:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
 	<con:DateTimeConverter x:Key="DateTimeConverter"/>
 	<con:EnumToBoolConverter x:Key="EnumToBoolConverter"/>
+	<con:EnumToBoolReConverter x:Key="EnumToBoolReConverter"/>
 	<con:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter"/>
+	<con:EnumToVisibilityReConverter x:Key="EnumToVisibilityReConverter"/>
 	<con:IListToBoolConverter x:Key="IListToBoolConverter"/>
+	<con:IListToBoolReConverter x:Key="IListToBoolReConverter"/>
 	<con:IListToCountConverter x:Key="IListToCountConverter"/>
 	<con:IListToIndexConverter x:Key="IListToIndexConverter"/>
 	<con:IListToVisibilityConverter x:Key="IListToVisibilityConverter"/>
+	<con:IListToVisibilityReConverter x:Key="IListToVisibilityReConverter"/>
 	<con:IsSubClassConverter x:Key="IsSubClassConverter"/>
 
 	<con:ContrastBrushConverter x:Key="ContrastBrushConverter"/>
